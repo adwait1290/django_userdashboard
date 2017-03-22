@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon"/>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class='container-fluid'>
+        <div class='row' id='header'>
+            <div class='col-xs-2 col-xs-offset-1 col-md-2 col-md-offset-1' id='logo'>
+                <h2>Test App</h2>
+            </div>
+            <div id='nav_wrapper' class='col-xs-6 col-md-6'>
+                <ul id='nav_bar'>
+                    <li><a href='/dashboard'><h3>Dashboard</h3></a></li>
+                    <li><a href='/users/edit/'><h3>Profile</h3></a></li>
+                </ul>
+            </div>
+            <div class='col-xs-2 col-md-2' id='right_header'>
+                <a href='/logoff'><h3>Log Off</h3></a>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-xs-5 col-xs-offset-1'>
+                <h3>{{user.first_name}} {{user.last_name}}</h3>
+                <h4>Registered at: {{user.created_at}}</h4>
+                <h4>User ID: #{{user.id}}</h4>
+                <h4>Email Address: {{user.email}}</h4>
+                <h4>Description: {{user.description}}</h4>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-xs-10 col-xs-offset-1'>
+                <form action='/users/show/post_message/{{user.id}}' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label for='message'>Leave a message for {{user.first_name}}</label>
+                        <textarea name='message' class='form-control' id='message'></textarea>
+                    </div>
+                    <input class="btn btn-success pull-right" type="submit" value="Post">
+                </form>
+            </div>
+        </div>
+        {% for message in messages %}
+        <div class='row'>
+            <div class='col-xs-11 col-xs-offset-1'>
+                <h4>{{message.poster.first_name}} {{message.poster.last_name}} wrote:</h4>
+                <div class='col-xs-11 message_wrapper'>
+                    <h3 class='messages'>{{message.content}}</h3>
+                </div>
+                <div class='row'>
+                    {% for comment in comments %}
+                        {% if comment.message_id == message %}
+                            <div class='row'>
+                                <div class='col-xs-11'>
+                                    <h5 class='comment_text'>{{message.poster.first_name}} {{message.poster.last_name}} wrote:</h5>
+                                    <div class='col-xs-11'>
+                                        <h5 class='comments'>{{comment.content}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class='col-xs-10'>
+                        <form action='/users/show/post_comment/{{user.id}}/{{message.id}}' method='post'>
+                            {% csrf_token %}
+                            <div class='form-group'>
+                                <textarea name='comment' class='form-control' id='comment'></textarea>
+                            </div>
+                            <input class="btn btn-success pull-right" type="submit" value="Post">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+	<div class='row'>
+	<div class="col-xs-12">
+	{% if friends%}
+		<h3>Here's a list of your friends:</h3>
+	{% else %}
+		<h3>Sorry! You don't have any friends!</h3>
+	{% endif %}	
+    </div>
+</body>
+</htmlv class='row'>
+            <div class='col-sm-7' id='friends_table'>
+                <table class='table table-striped table-responsive'>
+                    <tr>
+                        <th>Alias</th>
+                        <th>Action</th>
+                    </tr>
+                        {% for friend in friends %}
+                        <tr>
+                            <td>{{friend.alias}}</td>
+                            <td>
+                                <a href='/users/{{friend.id}}'><h4 class='inline'>View Profile</h4></a>
+                                <a href='/users/remove/{{friend.id}}'><h4 class='inline'>Remove as Friend</h4></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+          </table>
+            </div>
+        </div>
+        <h3>Other Users not on your friend's list:</h3>
+        <div class='row'>
+            <div class='col-sm-7' id='user_table'>
+                <table class='table table-striped table-responsive'>
+                    <tr>
+                        <th>Alias</th>
+                        <th>Action</th>
+                    </tr>
+                        {% for user in users %}
+                        <tr>
+			    <td>{{user.first_name }} {{user.last_name }}</td>
+                            <td><a href='/users/{{user.id}}'></a></td>
+                            <td>
+                                <form action='/users/add/{{user.id}}' method='post'>
+                                    {% csrf_token %}
+                                    <input id='add' type='submit' value='Add as Friend'>
+             </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+

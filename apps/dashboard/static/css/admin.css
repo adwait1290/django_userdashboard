@@ -1,0 +1,47 @@
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
+
+#header {
+    border-bottom: 3px solid black;
+
+}
+#logo {
+    width: 160px !important;
+}
+
+#nav_wrapper {
+    padding-left: 0px !important;
+    padding-top: 5px !important;
+}
+
+#nav_bar {
+    list-style-type: none;
+    padding-left: 0px !important;
+    display: inline !important;
+}
+    #nav_bar li {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+#right_header {
+    list-style-type: none;
+}
+
+.messages {
+    border: 1px solid black;
+    padding-bottom: 5%;
+
+}
+
+.message_wrapper {
+    padding-left: 0px !important;
+}
+
+.comments {
+    border: 1px solid black;
+    padding-bottom: 5%;
+}
+
+.comment_text {
+    padding-left: 10px;
+}

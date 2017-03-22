@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon"/>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class='container-fluid'>
+        <div class='row' id='header'>
+            <div class='col-xs-2 col-xs-offset-1 col-md-2 col-md-offset-1' id='logo'>
+                <h2>Test App</h2>
+            </div>
+            <div id='nav_wrapper' class='col-xs-6 col-md-6'>
+                <ul id='nav_bar'>
+                    <li><a href='/dashboard'><h3>Dashboard</h3></a></li>
+                    <li><a href='/users/edits/'><h3>Profile</h3></a></li>
+                </ul>
+            </div>
+            <div class='col-xs-2 col-md-2' id='right_header'>
+                <a href='/logoff'><h3>Log Off</h3></a>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div id='titles' class='row'>
+            <div class='col-xs-12'>
+                <h2>Edit Profile</h2>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-xs-6'>
+                <form action='/users/edit_info/' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label for='email'>Email Address:</label>
+                        <input name='email' type='email' class='form-control' id='email' placeholder='Email'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='first_name'>First Name:</label>
+                        <input name='first_name' type='text' class='form-control' id='first_name' placeholder='First Name'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='last_name'>Last Name:</label>
+                        <input name='last_name' type='text' class='form-control' id='Last_name' placeholder='Last Name'>
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Save">
+                </form>
+            </div>
+            <div class='col-xs-6'>
+                <form action='/users/edit_password/' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label for='password'>Password:</label>
+                        <input name='password' type='password' class='form-control' id='password' placeholder='Password'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='confirm'>Confirm Password:</label>
+                        <input name='password_confirmation' type='password' class='form-control' id='confirm' placeholder='Confirm Password'>
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Update Password">
+                </form>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-xs-12'>
+                <form action='/users/edit_description/' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label for='email'>Edit Description:</label>
+                        <textarea class="form-control" rows='3' name='description'></textarea>
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Register">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

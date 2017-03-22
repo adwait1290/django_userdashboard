@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon"/>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class='container-fluid'>
+        <div class='row' id='header'>
+            <div class='col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1' id='logo'>
+                <h2>Test App</h2>
+            </div>
+            <div id='nav_wrapper' class='col-lg-7 col-md-7'>
+                <ul id='nav_bar'>
+                    <li><a href='/'><h3>Home</h3></a></li>
+                </ul>
+            </div>
+            <div class='col-lg-2 col-md-2' id='right_header'>
+                <h3><a href='/signin'>Sign in</a></h3>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-lg-12' id='welcome'>
+                <h1>Welcome to the Test</h1>
+                <h2>We're going to build a cool application using a MVC framework! This application was built with the Village88 folks!</h2>
+                <a href='/register'><button type="button" class="btn btn-primary">Start</button></a>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-lg-4 col-md-4 info'>
+                <h2>Manage Users</h2>
+                <h3>Using this application, you'll learn how to add, remove, and edit users for the application</h3>
+            </div>
+            <div class='col-lg-4 col-md-4 info'>
+                <h2>Leave messages</h2>
+                <h3>Users will be able to leave a message to another user using this application</h3>
+            </div>
+            <div class='col-lg-4 col-md-4 info'>
+                <h2>Edit User Information</h2>
+                <h3>Admins will be able to edit another user's information (email address, first name, last name, etc)</h3>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

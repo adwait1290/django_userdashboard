@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon"/>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class='container-fluid'>
+        <div class='row' id='header'>
+            <div class='col-xs-2 col-xs-offset-1 col-md-2 col-md-offset-1' id='logo'>
+                <h2>Test App</h2>
+            </div>
+            <div id='nav_wrapper' class='col-xs-6 col-md-6'>
+                <ul id='nav_bar'>
+                    <li><a href='/dashboard/admin'><h3>Dashboard</h3></a></li>
+                    <li><a href='/users/edit/'><h3>Profile</h3></a></li>
+                </ul>
+            </div>
+            <div class='col-xs-2 col-md-2' id='right_header'>
+                <a href='/logoff'><h3>Log Off</h3></a>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div id='titles' class='row'>
+            <div class='col-xs-8'>
+                <h2>Edit User #{{user_id}}</h2>
+            </div>
+            <div class='col-xs-4'>
+                <a href='/dashboard/admin'><button type="button" class="btn btn-primary">Return to Dashboard</button></a>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-xs-6'>
+                <form action='/users/specific_edit_info/{{user_id}}' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label for='email'>Email Address:</label>
+                        <input name='email' type='email' class='form-control' id='email' placeholder='Email'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='first_name'>First Name:</label>
+                        <input name='first_name' type='text' class='form-control' id='first_name' placeholder='First Name'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='last_name'>Last Name:</label>
+                        <input name='last_name' type='text' class='form-control' id='Last_name' placeholder='Last Name'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='user_level'>User Level:</label>
+                        <input name='user_level' type='number' class='form-control' id='user_level' placeholder='User Level'>
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Save">
+                </form>
+            </div>
+            <div class='col-xs-6'>
+                <form action='/users/specific_edit_password/{{user_id}}' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label for='password'>Password:</label>
+                        <input name='password' type='password' class='form-control' id='password' placeholder='Password'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='confirm'>Confirm Password:</label>
+                        <input name='password_confirmation' type='password' class='form-control' id='confirm' placeholder='Confirm Password'>
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Update Password">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
